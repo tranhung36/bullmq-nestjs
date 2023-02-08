@@ -9,6 +9,9 @@ export class TranscodeConsumer {
 
   @Process()
   async transcode(job: Job<unknown>) {
-    this.logger.log(job);
+    this.logger.log(`Transcoding message: ${job.id}`);
+    this.logger.debug(`Data: ${JSON.stringify(job.data)}`);
+    await new Promise<void>((resolve) => setTimeout(() => resolve(), 8000));
+    this.logger.log(`Transcoding complete for job: ${job.id}`);
   }
 }
